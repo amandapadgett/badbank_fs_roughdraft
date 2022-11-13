@@ -18,16 +18,25 @@ app.post('/account/create/:name/:email/:password', function (req, res) {
 
 //login
 app.get('/account/login/:email/:password', (req, res) => {
-  dal.findOne(req.params.email).then((user) => {
-    if (user) {
-      if (user.password === req.params.password) {
-        res.send(user);
+  dal.find(req.params.email).then((user) => {
+    if (user.length > 0) {
+      if (user[0].password === req.params.password) {
+        res.send(user[0]);
       } else {
         res.send('Incorrect password');
       }
     } else {
       res.send('Email not found');
     }
+  });
+});
+
+//find account
+app.get('/account/find/:email', (req, res) => {
+ 
+  dal.find(req.params.email).then((user) => {
+    console.log(user);
+    res.send(user);
   });
 });
 

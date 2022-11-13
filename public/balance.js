@@ -3,8 +3,8 @@ function Balance(props) {
   const [status, setStatus] = React.useState('');
   const [balance, setBalance] = React.useState('');
 
-  const ctx = React.useContext(UserContext);
-  console.log(ctx);
+  // const ctx = React.useContext(UserContext);
+
   return (
     <Card
       bgcolor='info'
@@ -22,8 +22,10 @@ function Balance(props) {
           </>
         ) : (
           <>
-            {' '}
-            <BalanceMsg setShow={setShow} setStatus={setStatus} />
+            {/* {' '} */}
+            <BalanceMsg 
+              setShow={setShow}
+              setStatus={setStatus} /> 
             <h5>Your Balance Is: ${balance}</h5>
           </>
         )
@@ -37,15 +39,15 @@ function BalanceMsg(props) {
     <>
       <h5>Success</h5>
       <button
-        type='submit'
+        type="submit"
         className='btn btn-light'
         onClick={() => {
           props.setShow(true);
           props.setStatus('');
         }}
       >
-        Recheck Balance
-      </button>
+        Check Another Account Balance
+      </button> <br />
     </>
   );
 }
@@ -62,11 +64,11 @@ function BalanceForm(props) {
           const data = JSON.parse(text);
           props.setStatus(text);
           props.setShow(false);
-          setBalance(data.balance);
+          setBalance(user.balance);
           console.log('JSON: ', data);
         } catch (err) {
           props.setStatus(text);
-          console.log('err: ', text);
+          console.log('the freaking err: ', text);
         }
       });
   }
@@ -79,13 +81,13 @@ function BalanceForm(props) {
         type='input'
         className='form-control'
         placeholder='Enter email'
-        value={props.user.email}
+        value={email}
         onChange={(e) => setEmail(e.currentTarget.value)}
       />
       <br />
       <button type='submit' className='btn btn-light' onClick={handle}>
         Check Balance
-      </button>
+      </button> <br />
     </>
   );
 }

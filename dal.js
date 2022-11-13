@@ -8,7 +8,7 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
     console.log("Connected successfully to amanda db server");
 
     // connect to myproject database
-    db = client.db('badbanktrial');
+    db = client.db('badbanktrial2');
 });
 
 //create user account
@@ -18,11 +18,24 @@ function create(name, email, password) {
         const doc = {name, email, password, balance: 0};
         collection.insertOne(doc, {w:1}, function(err, result) {
             err ? reject(err) : resolve(doc);
-        });
+        })
     })
 }
 
-//find user acccount
+// find user account
+function find(email){
+    return new Promise((resolve, reject) => {    
+        const customers = db
+            .collection('users')
+            .find({ email: email })
+            .toArray(function(err, docs) {
+                err ? reject(err) : resolve(docs);
+        });    
+    })
+}
+
+
+//find one user acccount
 function findOne(email) {
     return new Promise((resolve, reject) => {
         const customers = db
@@ -40,7 +53,7 @@ function update(email, amount) {
         .collection('users')
         .findOneAndUpdate(
             { email: email },
-            { $inc: {balance: amount }},
+            { $inc: { balance: amount }}, 
             { returnOriginal: false },
             function(err, documents) {
                 err ? reject(err) : resolve(documents);
@@ -61,4 +74,4 @@ function all() {
     })
 }
 
-module.exports = {create, findOne, update, all};
+module.exports = {create, find, findOne, update, all};

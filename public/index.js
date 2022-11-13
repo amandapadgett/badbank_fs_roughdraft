@@ -1,35 +1,31 @@
-function Spa() {
-  const [user, setUser] = React.useState({});
+function Spa(props, state){
+  // const [user, setUser] = React.useState({});
 
   return (
     <HashRouter>     
-        {/* <UserContext.Provider value={{user: {email: ''}}}> */}
-        <NavBar setUser={setUser} user={user}/>   
+        <UserContext.Provider value={{user: {email: ''}}}>
+        <NavBar />   
 
           <div className="container" style={{padding: "20px"}}>
 
             <Route path="/" exact component={Home} />
 
-            <Route path="/CreateAccount/" component={CreateAccount} />
+            <Route path="/createaccount/" component={CreateAccount} />
 
-            <Route path="/login/" component={Login} >
-                <Login setUser={setUser}/> </Route>
+            <Route path="/login/" component={Login} />
 
-            <Route path="/deposit/" component={Deposit} >
-            <Deposit user={user}/> </Route>
+            <Route path="/deposit/" component={Deposit} />
 
-            <Route path="/withdraw/" component={Withdraw} >
-            <Withdraw user={user}/> </Route>
+            <Route path="/withdraw/" component={Withdraw}/ >
 
-            {/* <Route path="/transactions/" component={Transactions} /> */}
-
-            <Route path="/balance/" component={Balance} >
-            <Balance user={user}/> </Route>
+            <Route path="/balance/" component={Balance} />
 
             <Route path="/alldata/" component={AllData} />
 
+            {/* <Route path="/logout/" component={logout} ></Route> */}
+
           </div>
-        {/* </UserContext.Provider> */}
+        </UserContext.Provider>
 
     </HashRouter>
   );

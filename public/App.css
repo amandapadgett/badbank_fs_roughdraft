@@ -1,0 +1,126 @@
+body {
+  background-color: #e3ead2;
+  color: #555;
+  margin-top: 0px;
+  font-size: 16px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  
+}
+
+.navbar-nav li {
+  position: relative;
+ 
+}
+
+
+.navbar-nav span {
+  position: absolute;
+  top: 40px;
+  left: 0px;
+  /* border: 2px solid #ff0; */
+  background-color:rgb(149, 199, 98);
+  font-size: 10pt;
+  color: #fff;
+  padding: 5px;
+  height: 50px;
+  width: auto;
+  display: none;
+  font-weight: bold;
+  border-radius: 15px;
+  text-align: center;
+ 
+}
+
+.navbar-nav li:hover span {
+  display: block;
+  position: absolute;
+}
+
+
+.navbar {
+  margin-bottom: 50px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  border-bottom: rgb(141, 185, 138) solid 5px ;
+}
+
+.card {
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 120px;
+  text-align: center;
+  
+  /* border: 5px solid rgb(237, 238, 245); */
+  /* border-radius: 30px; */
+  
+}
+
+.card-header {
+  font-size: 18px;
+  /* border: #fff */
+}
+
+.card-body {
+  font-weight: bold;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.btn .nav-link {
+  color:rgb(192, 235, 193);
+}
+
+.btn-primary {
+  background-color: #c21169dd!important;
+}
+
+.btn-info {
+  background-color: rgba(57, 167, 187, 0.731);
+  border: 2px solid rgba(116, 228, 228, 0.747)
+}
+
+
+.bg-primary {
+  background-color: #d61977dd!important;
+}
+
+.bg-success {
+  background-color: #6aa84f!important;
+}
+
+.bg-secondary {
+  background-color: #7b71ad!important;
+}
+
+/* .nav-link .navToolTip {
+  position: absolute;
+  bottom: 75px;
+  left: 0;
+  background: #fff;
+  width: 95px;
+  padding: 10px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #ff0d0d;
+  font-weight: bold;
+} */
+
+.table {
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  margin-left: 60px;
+  text-align: center;
+  width: 500px;
+  border: 5px solid rgb(137, 187, 137);
+  font-size: 14px;
+
+}
+

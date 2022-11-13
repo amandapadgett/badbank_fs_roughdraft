@@ -1,71 +1,101 @@
-function Withdraw(){
-  const [show, setShow]     = React.useState(true);
-  const [status, setStatus] = React.useState('');  
+function Withdraw(props) {
+  const [show, setShow] = React.useState(true);
+  const [status, setStatus]  = React.useState('');
+  const [amount, setAmount] = React.useState('');
 
+  console.log(amount)
+      
   return (
-    <Card
-      bgcolor="success"
-      header="Withdraw"
+      <Card
+      bgcolor='warning'
+      header='Withdraw'
       status={status}
       body={show ? 
-        <WithdrawForm setShow={setShow} setStatus={setStatus}/> :
-        <WithdrawMsg setShow={setShow}/>}
-    />
+          (<>
+          <WithdrawForm 
+              user={props.user}
+              setShow={setShow}
+              setStatus={setStatus}
+              setAmount={setAmount} />
+              
+              </> ) : 
+              <> <WithdrawMsg 
+                  setShow={setShow}
+                  setStatus={setStatus} />
+              </>}
+              />
   )
 }
 
-function WithdrawMsg(props){
-  return(<>
-    <h5>Success</h5>
-    <button type="submit" 
-      className="btn btn-light" 
-      onClick={() => props.setShow(true)}>
-        Withdraw again
-    </button>
+function WithdrawMsg(props) {
+//   const [balance, setBalance] = React.useState('');
+
+  return (<>
+  <h5>Withdrawal Complete</h5>
+  <h6>Current Balance: need help here</h6>
+  <button 
+      type='submit'
+      className='btn btn-light'
+      onClick={() => {
+          props.setShow(true);
+          props.setStatus('');
+      }}>
+          Make Another Withdrawal
+      </button>
+  
   </>);
 }
 
-function WithdrawForm(props){
-  const [email, setEmail]   = React.useState('');
+function WithdrawForm(props) {
   const [amount, setAmount] = React.useState('');
-  const ctx = React.useContext(UserContext);  
+  const [email, setEmail] = React.useState('');
 
-  function handle(){
-    console.log(email,amount);
-    const user = ctx.users.find((user) => user.email == email);
-    if (!user) {
-      props.setStatus('fail!')      
-      return;      
-    }
+  function handle() {
+      fetch(`/account/update/${email}/${-amount}`)
+      .then(response => response.text())
+      .then(text => {
+          try {
+              const data = JSON.parse(text);
+              props.setStatus(JSON.stringify(data.amount));
+              props.setShow(false);
+              console.log('JSON:', data);
+             
+          } catch(err) {
+              props.setStatus('Withdrawal failed')
+              console.log('err:', text);
+          }
+  });
 
-    user.balance = user.balance - Number(amount);
-    console.log(user);
-    props.setStatus('');      
-    props.setShow(false);
-  }
+}
+
+return (
+  <>
+  User <br/>
+  <input 
+      type="input"
+      className="form-control"
+      placeholder="Enter account email"
+      value={email}
+      onChange={e => setEmail(e.currentTarget.value)} /> 
+      <br />
 
 
-  return(<>
+  Amount <br />
+  <input
+      type='number'
+      className='form-control'
+      placeholder='Enter Amount'
+      value={amount}
+     
+      onChange={e => setAmount(e.currentTarget.value)} /> <br/>
 
-    Email<br/>
-    <input type="input" 
-      className="form-control" 
-      placeholder="Enter email" 
-      value={email} 
-      onChange={e => setEmail(e.currentTarget.value)}/><br/>
-
-    Amount<br/>
-    <input type="number" 
-      className="form-control" 
-      placeholder="Enter amount" 
-      value={amount} 
-      onChange={e => setAmount(e.currentTarget.value)}/><br/>
-
-    <button type="submit" 
-      className="btn btn-light" 
+  <button 
+      type='submit'
+      className="btn btn-light"
+      disabled={amount === '' || amount <= 0 || isNaN(amount)}
       onClick={handle}>
-        Withdraw
-    </button>
-
-  </>);
+         Withdraw
+  </button>
+  </>
+)
 }
