@@ -2,6 +2,7 @@ function NavBar(props){
   const ctx = React.useContext(UserContext); 
   let user = ctx.user;
   const [show, setShow] = React.useState(true);
+  const [status, setStatus] = React.useState('');
 
   function handleLogout() {
     console.log("logging user out");
@@ -9,7 +10,12 @@ function NavBar(props){
         .then(() => {
             console.log('User signed out of firebase');
             setShow(false);
-            // alert('User is logged out.')
+            alert('User is logged out.');
+            user.email = null;
+            user.password = null;
+            user.balance = null;
+            user.name = null;
+          
         })
         .catch(function(error){
             console.log(error)

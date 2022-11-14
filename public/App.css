@@ -1,5 +1,5 @@
 body {
-  background-color: #e3ead2;
+  background-color: #d7d5bc;
   color: #555;
   margin-top: 0px;
   font-size: 16px;
@@ -18,7 +18,7 @@ body {
   top: 40px;
   left: 0px;
   /* border: 2px solid #ff0; */
-  background-color:rgb(149, 199, 98);
+  background-color:rgb(48, 47, 120);
   font-size: 10pt;
   color: #fff;
   padding: 5px;
@@ -42,14 +42,14 @@ body {
   font-size: 16px;
   font-weight: 500;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  border-bottom: rgb(141, 185, 138) solid 5px ;
+  border-bottom: rgb(69, 85, 163) solid 5px ;
 }
 
 .card {
   padding: 10px;
   justify-content: center;
   align-items: center;
-  margin-left: 120px;
+  margin-left: 80px;
   text-align: center;
   
   /* border: 5px solid rgb(237, 238, 245); */
@@ -58,7 +58,7 @@ body {
 }
 
 .card-header {
-  font-size: 18px;
+  font-size: 16px;
   /* border: #fff */
 }
 
@@ -80,13 +80,13 @@ body {
 }
 
 .btn-info {
-  background-color: rgba(57, 167, 187, 0.731);
-  border: 2px solid rgba(116, 228, 228, 0.747)
+  background-color: rgba(34, 99, 73, 0.864);
+  /* border: 2px solid rgba(116, 228, 228, 0.747) */
 }
 
 
 .bg-primary {
-  background-color: #d61977dd!important;
+  background-color: #a27a75dd!important;
 }
 
 .bg-success {
@@ -94,7 +94,13 @@ body {
 }
 
 .bg-secondary {
-  background-color: #7b71ad!important;
+  background-color: #6b76a2d7!important;
+}
+.bg-warning {
+  background-color: #c57533d7!important;
+}
+.bg-info {
+  background-color: #32818bd7!important;
 }
 
 /* .nav-link .navToolTip {
