@@ -1,9 +1,10 @@
-function Balance(props) {
+function Balance() {
   const [show, setShow] = React.useState(true);
   const [status, setStatus] = React.useState('');
-  const [balance, setBalance] = React.useState('');
+  // const [balance, setBalance] = React.useState('');
 
-  // const ctx = React.useContext(UserContext);
+  const ctx = React.useContext(UserContext);
+  let user = ctx.user;
 
   return (
     <Card
@@ -14,19 +15,19 @@ function Balance(props) {
         show ? (
           <>
             <BalanceForm
-              user={props.user}
+              user={user}
               setShow={setShow}
               setStatus={setStatus}
-              setBalance={setBalance}
+              // setBalance={setBalance}
             />
           </>
         ) : (
           <>
-            {/* {' '} */}
+           
             <BalanceMsg 
               setShow={setShow}
               setStatus={setStatus} /> 
-            <h5>Your Balance Is: ${balance}</h5>
+           
           </>
         )
       }
@@ -34,16 +35,19 @@ function Balance(props) {
   );
 }
 
-function BalanceMsg(props) {
+function BalanceMsg() {
+  const ctx = React.useContext(UserContext);
+    let user = ctx.user;
   return (
     <>
-      <h5>Success</h5>
+      <h5>Success!</h5>
+      <h6>Current Balance: {user.balance}</h6>
       <button
         type="submit"
         className='btn btn-light'
         onClick={() => {
-          props.setShow(true);
-          props.setStatus('');
+          setShow(true);
+          setStatus('');
         }}
       >
         Check Another Account Balance
@@ -55,19 +59,26 @@ function BalanceMsg(props) {
 function BalanceForm(props) {
   const [email, setEmail] = React.useState('');
   const [balance, setBalance] = React.useState('');
+  const [status, setStatus] = React.useState('');
+  const ctx = React.useContext(UserContext);
+  let user = ctx.user;
 
   function handle() {
-    fetch(`/account/findOne/${email}`)
+    let user = ctx.user;
+    console.log('this is the user:', user);
+    console.log('this is the user balance:', user.balance);
+
+    fetch(`/account/find/${email}`)
       .then((response) => response.text())
       .then((text) => {
         try {
           const data = JSON.parse(text);
-          props.setStatus(text);
-          props.setShow(false);
-          setBalance(user.balance);
-          console.log('JSON: ', data);
+          setStatus(JSON.stringify(data.balance));
+          setShow(false);
+          // setBalance(user.balance);
+          
         } catch (err) {
-          props.setStatus(text);
+          setStatus('catch caught something');
           console.log('the freaking err: ', text);
         }
       });
@@ -85,7 +96,10 @@ function BalanceForm(props) {
         onChange={(e) => setEmail(e.currentTarget.value)}
       />
       <br />
-      <button type='submit' className='btn btn-light' onClick={handle}>
+      <button 
+        type='submit' 
+        className='btn btn-light' 
+        onClick={handle}>
         Check Balance
       </button> <br />
     </>

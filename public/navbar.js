@@ -1,5 +1,32 @@
-function NavBar(){
-  
+function NavBar(props){
+  const ctx = React.useContext(UserContext); 
+  let user = ctx.user;
+  const [show, setShow] = React.useState(true);
+
+  function handleLogout() {
+    console.log("logging user out");
+    firebase
+        .auth()
+        .signOut()
+        .then(() => {
+            console.log('signed out of firebase')
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+   }
+  // function handleLogout() {
+    
+  //     firebase.auth().signOut();
+  //     setShow(false);
+  //     user.email = null;
+  //     user.password = null;
+  //     user.balance = null;
+  //     user.name = null;
+
+  // }
+
+
   return(
     <>
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -50,7 +77,7 @@ function NavBar(){
             <span>View All Data</span>
           </li>       
           <li className="nav-item">
-            <a className="nav-link" href="#/Logout/">Logout</a>
+            <a className="nav-link" href="#/login/" onClick={handleLogout}>Logout</a>
             <span>Log Out</span>
           </li>       
              

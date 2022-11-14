@@ -1,8 +1,9 @@
-function Spa(props, state){
+function Spa(){
   // const [user, setUser] = React.useState({});
 
   return (
     <HashRouter>     
+
         <UserContext.Provider value={{user: {email: ''}}}>
         <NavBar />   
 
@@ -14,6 +15,7 @@ function Spa(props, state){
 
             <Route path="/login/" component={Login} />
 
+
             <Route path="/deposit/" component={Deposit} />
 
             <Route path="/withdraw/" component={Withdraw}/ >
@@ -22,7 +24,7 @@ function Spa(props, state){
 
             <Route path="/alldata/" component={AllData} />
 
-            {/* <Route path="/logout/" component={logout} ></Route> */}
+            {/* <Route path="/logout/" component={Logout} /> */}
 
           </div>
         </UserContext.Provider>

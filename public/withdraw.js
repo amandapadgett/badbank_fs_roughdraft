@@ -2,8 +2,9 @@ function Withdraw(props) {
   const [show, setShow] = React.useState(true);
   const [status, setStatus]  = React.useState('');
   const [amount, setAmount] = React.useState('');
+  const ctx = React.useContext(UserContext);
+  let user = ctx.user;
 
-  console.log(amount)
       
   return (
       <Card
@@ -28,11 +29,12 @@ function Withdraw(props) {
 }
 
 function WithdrawMsg(props) {
-//   const [balance, setBalance] = React.useState('');
+    const ctx = React.useContext(UserContext);
+    let user = ctx.user;
 
   return (<>
   <h5>Withdrawal Complete</h5>
-  <h6>Current Balance: need help here</h6>
+  <h6>Current Balance: {user.balance} </h6>
   <button 
       type='submit'
       className='btn btn-light'
@@ -49,8 +51,20 @@ function WithdrawMsg(props) {
 function WithdrawForm(props) {
   const [amount, setAmount] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [status, setStatus] = React.useState('');
+  const [balance, setBalance] = React.useState('');
+  const ctx = React.useContext(UserContext);
+   
+  
 
   function handle() {
+    let user = ctx.user;
+    user.balance = Number(user.balance) - Number(amount);
+    console.log('this is the amount:', amount);
+    console.log('this is the user:', user);
+    console.log('this is user balance:', user.balance);
+    console.log('this is ctx balance:' , ctx.balance);
+
       fetch(`/account/update/${email}/${-amount}`)
       .then(response => response.text())
       .then(text => {
@@ -59,13 +73,16 @@ function WithdrawForm(props) {
               props.setStatus(JSON.stringify(data.amount));
               props.setShow(false);
               console.log('JSON:', data);
-             
+             setBalance(data.balance);
           } catch(err) {
-              props.setStatus('Withdrawal failed')
+              props.setStatus('Withdrawal failed');
               console.log('err:', text);
           }
-  });
+          user.balance = Number(user.balance) - Number(amount);
+          console.log('this is bottom balance:', user.balance);
 
+    })
+   
 }
 
 return (

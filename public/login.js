@@ -1,70 +1,83 @@
-function Login(props){
+function Login(){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');   
-  const [email, setEmail]       = React.useState('');
-  const [password, setPassword] = React.useState(''); 
-  const ctx = React.useContext(UserContext)
+
+  const ctx = React.useContext(UserContext);
+
 
   return (
     <Card
       bgcolor="secondary"
       header="Login"
       status={status}
-      body={show ? 
-        <LoginForm 
-          setUser={props.setUser} 
+       body={show 
+      ? 
+       ( <LoginForm 
           setShow={setShow} 
-          setStatus={setStatus}/> :
+          setStatus={setStatus}/> 
+        ) : (
         <LoginMsg 
-          setShow={setShow} 
-          setStatus={setStatus}/>}
+         setShow={setShow} 
+          setStatus={setStatus}/> )
+    }
     />
   ) 
 }
 
-function LoginMsg(props){
+function LoginMsg(){
+  
   return(<>
-    <h5>Success</h5>
+    <h5>Successfully Logged In!</h5>
     <button type="submit" 
       className="btn btn-light" 
-      onClick={() => props.setShow(true)}>
+      onClick={() => setShow(true)}>
         Authenticate again
     </button>
   </>);
 }
 
-function LoginForm(props){
+function LoginForm(){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [status, setStatus] = React.useState('');
+  const [show, setShow] = React.useState(true);
+  // const setUser = React.useState('');
+  const ctx = React.useContext(UserContext);
+  let user = ctx.user;
+
 
   function handleEmailLogin(){
+  
     const auth = firebase.auth();
     const promise = auth.signInWithEmailAndPassword(email, password
     );
+
     firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
         console.log(firebaseUser);
         fetch(`/account/login/${email}/${password}`)
-    .then(response => response.text())
-    .then(text => {
-        try {
-            const data = JSON.parse(text);
-            props.setStatus('');
-            props.setShow(false);
-            props.setUser(data);
-            console.log('JSON:', data);
-        } catch(err) {
-            props.setStatus(text)
-            console.log('err:', text);
-        }
-    });
-       //success
-      } else {
-       //error codes
-      }
-    });
-    promise.catch((e) => console.log(e.message));
-  }
+        .then(response => response.text())
+        .then(text => {
+                const data = JSON.parse(text);
+                setStatus('');
+                setShow(false);
+              
+                console.log('JSON:', data);
+                ctx.user.email = email;
+                ctx.user.balance = data.balance;
+            })
+            .catch((error) => {
+              console.log('new err', error);
+            });
+
+          }
+        }) 
+        promise.catch((e) => console.log('this is the failed login error message:', e.message));
+       }
+      
+ 
+      
+  
 
   function handleGoogleLogin() {
     var provider = new firebase.auth.GoogleAuthProvider();
@@ -80,13 +93,13 @@ function LoginForm(props){
         .then(async (text) => {
             try {
                 const data = JSON.parse(text);
-                props.setStatus('');
-                props.setShow(false);
-                props.setUser(data);
+                setStatus('');
+                setShow(false);
+                setUser(data);
                 console.log('JSON:', data);
             } catch(err) {
               console.log(err);
-                props.setStatus(text)
+                setStatus(text)
                 console.log('err:', text);
                 
                 const url = `/account/create/${gmail}/${gmail}/${gmail}`;
@@ -94,12 +107,12 @@ function LoginForm(props){
                 const res = await fetch(`/account/login/${gmail}/${gmail}`)
                 const text = await res.text();
                 const data = JSON.parse(text);
-                      props.setStatus('');
-                      props.setShow(false);
-                      props.setUser(data);
+                      setStatus('');
+                      setShow(false);
+                      setUser(data);
             }
         })
-       
+        console.log(ctx);
       })
       .catch(function (error) {
         console.log(error.code);
@@ -127,6 +140,7 @@ function LoginForm(props){
         value={password}
         onChange={e => setPassword(e.currentTarget.value)} /> 
         <br/>
+
         <button 
         type="submit" 
         className="btn btn-light" 
@@ -134,6 +148,7 @@ function LoginForm(props){
         disabled={(password && email) ?false:true}
         onClick={handleEmailLogin}>Email Login</button> <br/>
         <br />
+
         <button 
         type="submit" 
         className="btn btn-light" 
@@ -147,6 +162,8 @@ function LoginForm(props){
     </>
     ) 
  }
+
+
   // return (<>
     
   // Email<br/>

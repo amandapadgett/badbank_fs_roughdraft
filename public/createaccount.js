@@ -53,6 +53,7 @@ function CreateAccount() {
             console.log(data);
             ctx.user.email = email;
             ctx.user.balance = 0;
+            console.log('this is the ctx:', ctx);
             })();      
         setShow(false);
         setStatus('')
