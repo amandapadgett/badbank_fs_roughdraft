@@ -63,9 +63,9 @@ function WithdrawForm(props) {
     console.log('this is the amount:', amount);
     console.log('this is the user:', user);
     console.log('this is user balance:', user.balance);
-    console.log('this is ctx balance:' , ctx.balance);
+   
 
-      fetch(`/account/update/${email}/${-amount}`)
+      fetch(`/account/update/${user.email}/${-amount}`)
       .then(response => response.text())
       .then(text => {
           try {
@@ -73,13 +73,14 @@ function WithdrawForm(props) {
               props.setStatus(JSON.stringify(data.amount));
               props.setShow(false);
               console.log('JSON:', data);
-             setBalance(data.balance);
+            
           } catch(err) {
               props.setStatus('Withdrawal failed');
               console.log('err:', text);
           }
-          user.balance = Number(user.balance) - Number(amount);
-          console.log('this is bottom balance:', user.balance);
+        //   user.balance = Number(user.balance) - Number(amount);
+        //   console.log('this is correct balance:', user.balance);
+        //   setBalance(user.balance); //trying it here
 
     })
    

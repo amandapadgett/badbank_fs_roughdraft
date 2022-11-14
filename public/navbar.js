@@ -5,16 +5,17 @@ function NavBar(props){
 
   function handleLogout() {
     console.log("logging user out");
-    firebase
-        .auth()
-        .signOut()
+    firebase.auth().signOut()
         .then(() => {
-            console.log('signed out of firebase')
+            console.log('User signed out of firebase');
+            setShow(false);
+            // alert('User is logged out.')
         })
         .catch(function(error){
             console.log(error)
         })
    }
+
   // function handleLogout() {
     
   //     firebase.auth().signOut();

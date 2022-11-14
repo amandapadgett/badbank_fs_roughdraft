@@ -1,10 +1,12 @@
-function Balance() {
+function Balance(props) {
   const [show, setShow] = React.useState(true);
   const [status, setStatus] = React.useState('');
+  const [email, setEmail] = React.useState('');
   // const [balance, setBalance] = React.useState('');
 
   const ctx = React.useContext(UserContext);
   let user = ctx.user;
+
 
   return (
     <Card
@@ -15,7 +17,7 @@ function Balance() {
         show ? (
           <>
             <BalanceForm
-              user={user}
+              user={props.user}
               setShow={setShow}
               setStatus={setStatus}
               // setBalance={setBalance}
@@ -34,24 +36,23 @@ function Balance() {
     />
   );
 }
+ 
 
-function BalanceMsg() {
+function BalanceMsg(props) {
   const ctx = React.useContext(UserContext);
-    let user = ctx.user;
+  let user = ctx.user;
+
   return (
     <>
       <h5>Success!</h5>
       <h6>Current Balance: {user.balance}</h6>
-      <button
+      {/* <button
         type="submit"
         className='btn btn-light'
-        onClick={() => {
-          setShow(true);
-          setStatus('');
-        }}
-      >
-        Check Another Account Balance
-      </button> <br />
+        // onClick={clearForm}
+      ><a href="#/balance/">
+        Check Another Account Balance</a>
+      </button> <br /> */}
     </>
   );
 }
@@ -61,22 +62,23 @@ function BalanceForm(props) {
   const [balance, setBalance] = React.useState('');
   const [status, setStatus] = React.useState('');
   const ctx = React.useContext(UserContext);
-  let user = ctx.user;
+  
 
   function handle() {
     let user = ctx.user;
-    console.log('this is the user:', user);
-    console.log('this is the user balance:', user.balance);
+    
+    console.log('this is the user top balance:', user.balance);
+    ctx.user.email = user.email;
 
-    fetch(`/account/find/${email}`)
+    fetch(`/account/find/${user.email}`)
       .then((response) => response.text())
       .then((text) => {
         try {
           const data = JSON.parse(text);
-          setStatus(JSON.stringify(data.balance));
-          setShow(false);
+          props.setStatus(JSON.stringify(data.balance));
+          props.setShow(false);
           // setBalance(user.balance);
-          
+          console.log('this is the bottom user:', user);
         } catch (err) {
           setStatus('catch caught something');
           console.log('the freaking err: ', text);

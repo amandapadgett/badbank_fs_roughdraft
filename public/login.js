@@ -1,9 +1,9 @@
-function Login(){
+function Login(props){
   const [show, setShow]     = React.useState(true);
   const [status, setStatus] = React.useState('');   
 
   const ctx = React.useContext(UserContext);
-
+  let user = ctx.user;
 
   return (
     <Card
@@ -13,6 +13,7 @@ function Login(){
        body={show 
       ? 
        ( <LoginForm 
+          user={props.user}
           setShow={setShow} 
           setStatus={setStatus}/> 
         ) : (
@@ -24,34 +25,38 @@ function Login(){
   ) 
 }
 
-function LoginMsg(){
-  
+function LoginMsg(props){
+  const ctx = React.useContext(UserContext);
+  let user = ctx.user;
+     
+   console.log('trying to find users name:',user.name);
+
   return(<>
-    <h5>Successfully Logged In!</h5>
-    <button type="submit" 
+    <h5>Welcome back, {user.name}! You are successfully Logged In!</h5>
+    <button 
+      type="submit" 
       className="btn btn-light" 
-      onClick={() => setShow(true)}>
+        onClick={() => props.setShow(true)}>
         Authenticate again
     </button>
   </>);
 }
 
-function LoginForm(){
+function LoginForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [status, setStatus] = React.useState('');
-  const [show, setShow] = React.useState(true);
-  // const setUser = React.useState('');
+  // const [status, setStatus] = React.useState('');
+  // const [show, setShow] = React.useState(true);
   const ctx = React.useContext(UserContext);
-  let user = ctx.user;
 
 
   function handleEmailLogin(){
-  
-    const auth = firebase.auth();
-    const promise = auth.signInWithEmailAndPassword(email, password
-    );
+   
+    let user = ctx.user;
+    console.log('login area username: ', user);
 
+    const auth = firebase.auth();
+    const promise = auth.signInWithEmailAndPassword(email, password);
     firebase.auth().onAuthStateChanged((firebaseUser) => {
       if (firebaseUser) {
         console.log(firebaseUser);
@@ -59,12 +64,14 @@ function LoginForm(){
         .then(response => response.text())
         .then(text => {
                 const data = JSON.parse(text);
-                setStatus('');
-                setShow(false);
-              
+                props.setStatus('');
+                props.setShow(false);
+                // props.setUser(data);
                 console.log('JSON:', data);
-                ctx.user.email = email;
+                ctx.user.name = data.name;
+                ctx.user.email = data.email;
                 ctx.user.balance = data.balance;
+                console.log('user name:',data.name);
             })
             .catch((error) => {
               console.log('new err', error);
@@ -73,11 +80,7 @@ function LoginForm(){
           }
         }) 
         promise.catch((e) => console.log('this is the failed login error message:', e.message));
-       }
-      
- 
-      
-  
+       } 
 
   function handleGoogleLogin() {
     var provider = new firebase.auth.GoogleAuthProvider();
@@ -146,48 +149,18 @@ function LoginForm(){
         className="btn btn-light" 
         id="firebase-submit-button"
         disabled={(password && email) ?false:true}
-        onClick={handleEmailLogin}>Email Login</button> <br/>
+        onClick={handleEmailLogin}>Login with Email</button> <br/>
         <br />
 
         <button 
         type="submit" 
         className="btn btn-light" 
         id="google-submit-button"
-    
         disabled={(password && email) ?false:true}
-        onClick={handleGoogleLogin}>Google Login</button> <br/>
-
-    
-    
+        onClick={handleGoogleLogin}>Login with Google</button> <br/>    
     </>
     ) 
  }
 
 
-  // return (<>
-    
-  // Email<br/>
-  //   <input type="input" 
-  //     className="form-control" 
-  //     placeholder="Enter email" 
-  //     value={email} 
-  //     onChange={e => setEmail(e.currentTarget.value)}/><br/>
-
-  //   Password<br/>
-  //   <input type="password" 
-  //     className="form-control" 
-  //     placeholder="Enter password" 
-  //     value={password} 
-  //     onChange={e => setPassword(e.currentTarget.value)}/><br/>
-
-  //   <button 
-  //     type="submit"
-  //     className="btn btn-light" 
-  //     onClick={handle}>Login</button>
-  //   <br/>
-  //   <br/>
-  //   <button 
-  //     type="submit" 
-  //     className="btn btn-light" 
-  //     onClick={handleGoogle}>Google Login</button>
-  // </>);
+  

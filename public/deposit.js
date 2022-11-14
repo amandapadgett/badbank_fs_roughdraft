@@ -61,6 +61,7 @@ function DepositForm(props) {
         // let balance = document.getElementById('balance').value
         let user = ctx.user;
         user.balance = Number(user.balance) + Number(amount);
+        
         console.log('this is the amount:', amount);
         console.log('this is the user:', user);
         console.log('this is the user balance:', user.balance);
