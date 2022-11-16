@@ -87,6 +87,8 @@ function DepositForm(props) {
 
 return (
     <>
+    <h6>Please log into your account via the Login page before making a deposit.</h6> <br />
+        
     User Email <br/>
     <input 
         type="input"

@@ -81,7 +81,7 @@ function BalanceForm(props) {
           // setBalance(user.balance);
           console.log('this is the bottom user:', user);
         } catch (err) {
-          setStatus('catch caught something');
+          setStatus('');
           console.log('the freaking err: ', text);
         }
       });

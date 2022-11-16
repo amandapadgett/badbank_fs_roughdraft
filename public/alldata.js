@@ -6,7 +6,7 @@ function AllData(){
    fetch('/account/all')
      .then(response => response.json())
      .then(data => {
-       console.log(data[data.length - 1])
+       console.log('last user created: ', data[data.length - 1]); console.log('first user created: ', data[0])
        setData(JSON.stringify(data));
      })
   }, []);

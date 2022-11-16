@@ -51,9 +51,11 @@ function CreateAccount() {
             var res = await fetch(url, {method: 'POST', mode: 'cors'});
             var data = await res.json();
             console.log(data);
+            ctx.user.name = name;
             ctx.user.email = email;
             ctx.user.balance = 0;
             console.log('this is the ctx:', ctx);
+            console.log('users name:',name);
             })();      
         setShow(false);
         setStatus('')
@@ -113,6 +115,7 @@ function CreateAccount() {
            </> ) : ( <>
            
             <h5>Success!</h5>
+            <h6>{name}, your account has been created.</h6>
             <button 
             type="submit" 
             className="btn btn-light" 

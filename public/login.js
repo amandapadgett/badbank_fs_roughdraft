@@ -86,6 +86,8 @@ function LoginForm(props){
           }
         }) 
         promise.catch((e) => console.log('this is the failed login error message:', e.message));
+        // alert('Problem with email or password. Refresh your screen to try again.');
+        
        } 
 
   function handleGoogleLogin() {
