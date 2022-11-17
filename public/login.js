@@ -1,6 +1,7 @@
 function Login(props){
   const [show, setShow]     = React.useState(true);
-  const [status, setStatus] = React.useState('');   
+  const [status, setStatus] = React.useState('');  
+  const [name, setName] = React.useState(''); 
 
   const ctx = React.useContext(UserContext);
   let user = ctx.user;
@@ -18,7 +19,7 @@ function Login(props){
           setStatus={setStatus}/> 
         ) : (
         <LoginMsg 
-         // user={props.user} //trying
+         user={props.user} //trying
           setShow={setShow} 
           setStatus={setStatus}/> )
     }
@@ -33,7 +34,7 @@ function LoginMsg(props){
    console.log('trying to find users name:', user.name);
 
   return(<>
-    <h5>Welcome back {user.name}!</h5>
+    <h5>Welcome back {name}!</h5>
     <h6>You are successfully Logged In!</h6> <br />
    
     <button 
@@ -53,6 +54,7 @@ function LoginForm(props){
   const [password, setPassword] = React.useState('');
    const [status, setStatus] = React.useState('');
   const [show, setShow] = React.useState(true);
+ 
   const ctx = React.useContext(UserContext);
 
 
@@ -77,7 +79,7 @@ function LoginForm(props){
                 ctx.user.email = data.email;
                 ctx.user.balance = data.balance;
                 console.log('user name:',user.name);
-               
+              
             })
             .catch((error) => {
               console.log('new err', error);

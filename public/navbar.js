@@ -90,7 +90,11 @@ function NavBar(props){
           </li>       
              
         </ul>
+       
         </div>
+        <span class="navbar-text">
+        Logged in user here
+      </span>
      
     </nav>
     </>

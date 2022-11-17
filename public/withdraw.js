@@ -33,8 +33,8 @@ function WithdrawMsg(props) {
     let user = ctx.user;
 
   return (<>
-  <h5>Withdrawal Complete</h5>
-  <h6>Current Balance: {user.balance} </h6>
+  <h5>Withdrawal Complete, {ctx.user.name}!</h5>
+  <h6>Current Balance: ${user.balance} </h6>
   <button 
       type='submit'
       className='btn btn-light'
@@ -53,6 +53,7 @@ function WithdrawForm(props) {
   const [email, setEmail] = React.useState('');
   const [status, setStatus] = React.useState('');
   const [balance, setBalance] = React.useState('');
+  const [name, setName] = React.useState('');
   const ctx = React.useContext(UserContext);
    
   
@@ -73,7 +74,8 @@ function WithdrawForm(props) {
               props.setStatus(JSON.stringify(data.amount));
               props.setShow(false);
               console.log('JSON:', data);
-            
+              setName(ctx.user.name);
+              console.log('username:',ctx.user.name);
           } catch(err) {
               props.setStatus('Withdrawal failed');
               console.log('err:', text);

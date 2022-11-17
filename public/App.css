@@ -45,6 +45,13 @@ body {
   border-bottom: rgb(69, 85, 163) solid 5px ;
 }
 
+.navbar-text span {
+  align-items: right;
+ 
+  justify-content: right;
+
+}
+
 .card {
   padding: 10px;
   justify-content: center;

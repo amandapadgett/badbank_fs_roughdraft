@@ -44,9 +44,9 @@ function BalanceMsg(props) {
 
   return (
     <>
-      <h5>{user.name}</h5>
+      <h5>{user.name}'s Balance:</h5>
 
-      <h6>Your Current Balance: ${user.balance}</h6>
+      <h5>${user.balance}</h5>
       {/* <button
         type="submit"
         className='btn btn-light'
