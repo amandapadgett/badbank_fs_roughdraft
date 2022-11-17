@@ -19,7 +19,7 @@ function Login(props){
           setStatus={setStatus}/> 
         ) : (
         <LoginMsg 
-         user={props.user} //trying
+        //  user={props.user} //trying
           setShow={setShow} 
           setStatus={setStatus}/> )
     }
@@ -31,37 +31,44 @@ function LoginMsg(props){
   const ctx = React.useContext(UserContext);
   let user = ctx.user;
      
-   console.log('trying to find users name:', user.name);
+   console.log('trying to find users name:', ctx.name);
 
   return(<>
-    <h5>Welcome back {name}!</h5>
-    <h6>You are successfully Logged In!</h6> <br />
+    <h5>Welcome back, {ctx.user}.</h5>
+    <h6>You are successfully logged in.</h6>
+    <h6>Your balance is ${ctx.balance}</h6> <br />
    
     <button 
       type="submit" 
-      className="btn btn-light" 
-        onClick={() => { 
-          props.setShow(true);
-        // props.setStatus('')
-        }}>
-        Authenticate again
+      className="btn btn-light" >
+      <a href="#/deposit/">Make a Deposit</a>
+    </button> 
+    <br /> <br/>
+    <button 
+      type="submit" 
+      className="btn btn-light" >
+      <a href="#/withdraw/">Make a Withdrawal</a>
     </button>
-  </>);
+  </>
+  );
 }
 
 function LoginForm(props){
   const [email, setEmail]       = React.useState('');
   const [password, setPassword] = React.useState('');
-   const [status, setStatus] = React.useState('');
+  const [status, setStatus] = React.useState('');
   const [show, setShow] = React.useState(true);
+  const [user, setUser] = React.useState('');
  
   const ctx = React.useContext(UserContext);
+  // const [name, setName] = React.useState('');
 
 
   function handleEmailLogin(){
     let user = ctx.user;
     console.log('login area username: ', ctx);
     // user.name = ctx.user.name;
+
     const auth = firebase.auth();
     const promise = auth.signInWithEmailAndPassword(email, password);
     firebase.auth().onAuthStateChanged((firebaseUser) => {
@@ -70,27 +77,25 @@ function LoginForm(props){
         fetch(`/account/login/${email}/${password}`)
         .then(response => response.text())
         .then(text => {
-                const data = JSON.parse(text);
-                // props.setStatus('');
-                props.setStatus(JSON.stringify(data.name));
-                props.setShow(false);
-                console.log('JSON:', data);
-                ctx.user.name = data.name;
-                ctx.user.email = data.email;
-                ctx.user.balance = data.balance;
-                console.log('user name:',user.name);
-              
-            })
-            .catch((error) => {
-              console.log('new err', error);
-            });
-          
+           const data = JSON.parse(text);
+            props.setStatus('');
+            // props.setStatus(JSON.stringify(data.name));
+            setUser(data.name);  
+            ctx.user = data.name;
+            ctx.email = data.email;
+            ctx.balance = data.balance;            
+            props.setShow(false);
+           
+            props.setStatus('');
+            console.log('JSON:', data);
+            // setName(ctx.user.name);
+          }) 
+          promise.catch(e => console.log(e.message));
           }
-        }) 
-        promise.catch((e) => console.log('this is the failed login error message:', e.message));
-        // alert('Problem with email or password. Refresh your screen to try again.');
         
-       } 
+      })    
+     
+    } 
 
   function handleGoogleLogin() {
     var provider = new firebase.auth.GoogleAuthProvider();

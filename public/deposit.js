@@ -5,7 +5,7 @@ function Deposit(props) {
     const ctx = React.useContext(UserContext);
     let user = ctx.user;
 
-    console.log(user.balance);
+    console.log('balance:', ctx.balance);
 
     return (
         <Card
@@ -35,8 +35,8 @@ function DepositMsg(props) {
     let user = ctx.user;
    return (
         <>
-        <h5>Success, {ctx.user.name}!</h5>
-        <h6>Current Balance: ${user.balance}</h6> <br />
+        <h5>Success, {user}!</h5>
+        <h6>Current Balance: ${ctx.balance}</h6> <br />
         <button 
             type='submit'
             className='btn btn-light'
@@ -59,32 +59,35 @@ function DepositForm(props) {
    
 
     function handleDeposit() {
-        // let balance = document.getElementById('balance').value
+      
         let user = ctx.user;
-        user.balance = Number(user.balance) + Number(amount);
-        
+        // user.balance = Number(user.balance) + Number(amount);
+             
         console.log('this is the amount:', amount);
         console.log('this is the user:', user);
-        console.log('this is the user balance:', user.balance);
+        console.log('this is the user balance:', ctx.balance);
 
-        fetch(`/account/update/${user.email}/${amount}`)
+        fetch(`/account/update/${email}/${amount}`)
         .then(response => response.text())
         .then(text => {
             try {
                 const data = JSON.parse(text);
                 props.setStatus(JSON.stringify(data.amount));
                 props.setShow(false);
-                console.log('JSON:', data);
-              setName(ctx.user.name);
-              console.log('username:',ctx.user.name);
-                
+            //     console.log('JSON:', data);
+            //   setName(ctx.user.name);
+             
+                ctx.user = data.name;
+                ctx.email = data.email;
+                ctx.balance = data.balance
+                console.log('username:',ctx.user);
             } catch(err) {
                 props.setStatus('Deposit failed')
                 console.log('err:', text);
             }
             
         });
-      
+        ctx.balance = Number(ctx.balance) + Number(amount)
       }
 
 return (

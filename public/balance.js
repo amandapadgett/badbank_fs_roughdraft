@@ -47,23 +47,23 @@ function BalanceMsg(props) {
       <h5>{user.name}'s Balance:</h5>
 
       <h5>${user.balance}</h5>
-      {/* <button
+      <button
         type="submit"
         className='btn btn-light'
-        // onClick={clearForm}
-      ><a href="#/balance/">
-        Check Another Account Balance</a>
-      </button> <br /> */}
+        onClick={() => {
+          props.setShow(true);
+          props.setStatus('');
+        }}>
+          Check Your Balance Again
+      </button> <br />
     </>
   );
 }
 
 function BalanceForm(props) {
   const [email, setEmail] = React.useState('');
-  const [balance, setBalance] = React.useState('');
   const [status, setStatus] = React.useState('');
   const ctx = React.useContext(UserContext);
-  
 
   function handle() {
     let user = ctx.user;
@@ -71,17 +71,17 @@ function BalanceForm(props) {
     console.log('this is the user top balance:', user.balance);
     ctx.user.email = user.email;
 
-    fetch(`/account/find/${user.email}`)
+    fetch(`/account/findOne/${user.email}`)
       .then((response) => response.text())
       .then((text) => {
         try {
           const data = JSON.parse(text);
-          props.setStatus(JSON.stringify(data.balance));
+          // props.setStatus(JSON.stringify(data.balance));
           props.setShow(false);
           // setBalance(user.balance);
           console.log('this is the bottom user:', user);
         } catch (err) {
-          setStatus('');
+          props.setStatus('');
           console.log('the freaking err: ', text);
         }
       });

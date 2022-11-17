@@ -1,5 +1,5 @@
 function Spa(){
-  // const [user, setUser] = React.useState({});
+  // const { user } = React.useAuthListener();
 
   return (
     <HashRouter>     

@@ -2,7 +2,8 @@ function NavBar(props){
   const ctx = React.useContext(UserContext); 
   let user = ctx.user;
   const [show, setShow] = React.useState(true);
-  const [status, setStatus] = React.useState('');
+  // const [status, setStatus] = React.useState('');
+  // const [name, setName] = React.useState('');
   
 
   function handleLogout() {
@@ -23,16 +24,20 @@ function NavBar(props){
         })
    }
 
-  // function handleLogout() {
-    
-  //     firebase.auth().signOut();
-  //     setShow(false);
-  //     user.email = null;
-  //     user.password = null;
-  //     user.balance = null;
-  //     user.name = null;
-
-  // }
+  // function handleUserLoggedIn() {
+  //   const auth = getAuth();
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //   // User is signed in, see docs for a list of available properties
+  //   // https://firebase.google.com/docs/reference/js/firebase.User
+  //   const uid = user.uid;
+  //   setName(user.name)
+  //     } else {
+  //       // User is signed out
+  //       // ...
+  //     }
+  //   });
+  //     }
 
 
   return(
@@ -88,12 +93,10 @@ function NavBar(props){
             <a className="nav-link" href="#/login/" onClick={handleLogout}>Logout</a>
             <span>Log Out</span>
           </li>       
-             
         </ul>
-       
         </div>
-        <span class="navbar-text">
-        Logged in user here
+        <span className="navbar-text">
+        UserName here
       </span>
      
     </nav>

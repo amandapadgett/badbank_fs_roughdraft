@@ -45,6 +45,16 @@ function CreateAccount() {
             e.message ? setShow(true) : setShow(false)
             setStatus(e.message)
             console.log(e.message)})
+        // const auth = getAuth();
+        // createUserWithEmailAndPassword(auth, email, password)
+        //     .then((userCredential) => {
+        //         //signed in
+        //         const user = userCredential.user;
+        //     })
+        //     .catch((error) => {
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //     })
 
         const url = `/account/create/${name}/${email}/${password}`;
         (async () => {
