@@ -71,12 +71,12 @@ function WithdrawForm(props) {
     //I did it!!! yay!
     //not now. of course I broke something and hadn't saved to Git
 
-    if(amount < ctx.balance) {
+    if(ctx.balance > amount) {
         ctx.balance = Number(ctx.balance) - Number(amount);
         setUpdate(false);
         setShow(true);
 
-      fetch(`/account/update/${user.email}/${-amount}`)
+      fetch(`/account/update/${email}/${-amount}`)
       .then(response => response.text())
       .then(text => {
           try {
@@ -88,8 +88,8 @@ function WithdrawForm(props) {
             //   setBalance(data.balance);
               ctx.email = data.email;
               ctx.balance = data.balance;
-              console.log('username:',ctx.user.name);
-              console.log('user balance:', ctx.balance)
+              console.log('username:',user);
+              console.log('user balance:', ctx.balance);
           } catch(err) {
               props.setStatus('Withdrawal failed');
               console.log('err:', text);

@@ -59,6 +59,7 @@ function LoginForm(props){
   const [status, setStatus] = React.useState('');
   const [show, setShow] = React.useState(true);
   const [user, setUser] = React.useState('');
+  const [update, setUpdate] = React.useState('');
  
   const ctx = React.useContext(UserContext);
   // const [name, setName] = React.useState('');
@@ -91,8 +92,14 @@ function LoginForm(props){
             // setName(ctx.user.name);
           }) 
           promise.catch(e => console.log(e.message));
+          } else if (!firebaseUser) {
+            alert('email or password was incorrect');
+            setTimeout(() => setStatus(''), 2000);
+            setEmail('');
+            setPassword('');
+            setUpdate(false);
           }
-        
+       
       })    
      
     } 

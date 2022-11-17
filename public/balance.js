@@ -6,7 +6,7 @@ function Balance(props) {
 
   const ctx = React.useContext(UserContext);
   let user = ctx.user;
-
+  console.log('user and balance:', user, ctx.balance);
 
   return (
     <Card
@@ -17,7 +17,7 @@ function Balance(props) {
         show ? (
           <>
             <BalanceForm
-              user={props.user}
+              // user={props.user}
               setShow={setShow}
               setStatus={setStatus}
               // setBalance={setBalance}
@@ -44,9 +44,9 @@ function BalanceMsg(props) {
 
   return (
     <>
-      <h5>{user.name}'s Balance:</h5>
+      <h5>{user}'s Balance:</h5>
 
-      <h5>${user.balance}</h5>
+      <h5>${ctx.balance}</h5>
       <button
         type="submit"
         className='btn btn-light'
@@ -67,21 +67,24 @@ function BalanceForm(props) {
 
   function handle() {
     let user = ctx.user;
+    console.log('the user is: ', user);
+    console.log('this is the user top balance:', ctx.balance);
     
-    console.log('this is the user top balance:', user.balance);
-    ctx.user.email = user.email;
-
-    fetch(`/account/findOne/${user.email}`)
+    fetch(`/account/findOne/${email}`)
       .then((response) => response.text())
       .then((text) => {
         try {
           const data = JSON.parse(text);
+          props.setStatus(JSON.stringify(data));
+          ctx.user = data.name;
+          ctx.email = data.email;
+          ctx.balance = data.balance;
           // props.setStatus(JSON.stringify(data.balance));
           props.setShow(false);
-          // setBalance(user.balance);
+         
           console.log('this is the bottom user:', user);
         } catch (err) {
-          props.setStatus('');
+          props.setStatus(text);
           console.log('the freaking err: ', text);
         }
       });

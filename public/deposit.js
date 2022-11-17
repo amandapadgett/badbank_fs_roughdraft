@@ -15,10 +15,10 @@ function Deposit(props) {
         body={show ? 
             (<>
             <DepositForm 
-                user={props.user}
+                // user={props.user}
                 setShow={setShow}
                 setStatus={setStatus}
-                setAmount={setAmount} 
+                // setAmount={setAmount} 
                 />
                 
                 </> ) : (
@@ -80,7 +80,7 @@ function DepositForm(props) {
                 ctx.user = data.name;
                 ctx.email = data.email;
                 ctx.balance = data.balance
-                console.log('username:',ctx.user);
+                console.log('username:',user);
             } catch(err) {
                 props.setStatus('Deposit failed')
                 console.log('err:', text);
