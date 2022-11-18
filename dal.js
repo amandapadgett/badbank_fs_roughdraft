@@ -1,9 +1,7 @@
-// const MongoClient = require('mongodb').MongoClient;
+const MongoClient = require('mongodb').MongoClient;
 const uri         = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/badbank';
 let db            = null;
 
-
-const { MongoClient, ServerApiVersion } = require('mongodb');
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
