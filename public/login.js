@@ -96,14 +96,14 @@ function LoginForm(props){
           }) 
           promise.catch(e => console.log('promise message:',e.message));
           } 
-            else  {
+          //   else  {
           
-            alert('email or password was incorrect');
-            setTimeout(() => setStatus(''), 2000);
-            setEmail('');
-            setPassword('');
-            setUpdate(false);
-          }
+          //   alert('email or password was incorrect');
+          //   setTimeout(() => setStatus(''), 2000);
+          //   setEmail('');
+          //   setPassword('');
+          //   setUpdate(false);
+          // }
        
       })    
      
