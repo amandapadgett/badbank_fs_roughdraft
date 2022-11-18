@@ -1,8 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
-// const url = "mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.hmbbsqn.mongodb.net/?retryWrites=true&w=majority";
 const url         = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/badbank';
 let db            = null;
-// const mongoose = require('mongoose');
+
 
  
 // connect to mongo
@@ -13,15 +12,6 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
     db = client.db('badbank');
 });
 
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/badbank', { useNewUrlParser: true });
-
-// connect to mongo
-// mongoose.connect(url, {useUnifiedTopology: true,  useNewURLParser: true,}, function(err, client) {
-//     console.log("Connected successfully to amanda db server");
-
-//     // connect to myproject database
-//     db = client.db('badbank');
-// });
 
 //create user account
 function create(name, email, password) {

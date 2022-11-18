@@ -62,7 +62,7 @@ function WithdrawForm(props) {
   
 
   function handle() {
-    let user = ctx.user;
+    let user = ctx;
       
     console.log('this is the amount:', amount);
     console.log('this is the user:', user);
@@ -76,7 +76,7 @@ function WithdrawForm(props) {
         setUpdate(false);
         setShow(true);
 
-      fetch(`/account/update/${user.email}/${-amount}`)
+      fetch(`/account/update/${user.email}/-${amount}`)
       .then(response => response.text())
       .then(text => {
           try {
