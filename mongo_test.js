@@ -5,7 +5,7 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
     console.log('connected to amandas database')
 
     //database name
-    const dbName = 'myproject';
+    const dbName = 'badbank';
     const db = client.db(dbName);
 
     //new user
