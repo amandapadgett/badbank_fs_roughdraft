@@ -2,18 +2,18 @@ var express = require('express');
 var app = express();
 var cors = require('cors');
 var dal = require('./dal.js');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 require('dotenv').config();
 
-mongoose
-  .connect("mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.hmbbsqn.mongodb.net/?retryWrites=true&w=majority",
-  {
-    useNewURLParser: true,
-    useUnifiedTopology: true,
-  }
-  )
-  .then(() => console.log('MongoDB is connected'))
-  .catch((error) => console.log(error));
+// mongoose
+//   .connect("mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.hmbbsqn.mongodb.net/?retryWrites=true&w=majority",
+//   {
+//     useNewURLParser: true,
+//     useUnifiedTopology: true,
+//   }
+//   )
+//   .then(() => console.log('MongoDB is connected'))
+//   .catch((error) => console.log(error));
 
 
 app.use(express.static('public'));
