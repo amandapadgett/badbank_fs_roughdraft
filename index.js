@@ -5,6 +5,17 @@ var dal = require('./dal.js');
 require('dotenv').config();
 const PORT = process.env.PORT ;
 
+mongoose
+  .connect("mongodb+srv://amandapadgett:<password>@cluster0.hmbbsqn.mongodb.net/test",
+  {
+    useNewURLParser: true,
+    useUnifiedTopology: true,
+  }
+  )
+  .then(() => console.log('MongoDB is connected'))
+  .catch((error) => console.log(error));
+
+
 app.use(express.static('public'));
 app.use(cors());
 
