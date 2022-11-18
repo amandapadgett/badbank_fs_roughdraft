@@ -2,9 +2,12 @@ var express = require('express');
 var app = express();
 var cors = require('cors');
 var dal = require('./dal.js');
+require('dotenv').config();
+const PORT = process.env.PORT ;
 
 app.use(express.static('public'));
 app.use(cors());
+
 
 //create account
 app.post('/account/create/:name/:email/:password', function (req, res) {
@@ -66,6 +69,5 @@ app.get('/account/all', (req, res) => {
   });
 });
 
-var port = 3000;
-app.listen(port);
-console.log('listening on port:' + port);
+ var port = process.env.PORT || 3000
+app.listen(PORT, () => console.log(`running on port:', ${PORT}`));

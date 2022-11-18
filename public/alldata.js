@@ -13,7 +13,7 @@ function AllData(){
  
    return (
      <>
-      <h5>All Data in Store</h5>
+      <h5>All Data at BadBank</h5>
      {data}<br/> 
      
      </>
