@@ -4,7 +4,7 @@ var cors = require('cors');
 var dal = require('./dal.js');
 const mongoose = require('mongoose');
 require('dotenv').config();
-const PORT = process.env.PORT;
+
 
 
 mongoose
@@ -82,5 +82,5 @@ app.get('/account/all', (req, res) => {
   });
 });
 
-const port = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => console.log(`running on port: ${PORT}`));
