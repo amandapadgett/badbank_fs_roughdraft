@@ -64,13 +64,14 @@ function BalanceForm(props) {
   const [email, setEmail] = React.useState('');
   const [status, setStatus] = React.useState('');
   const ctx = React.useContext(UserContext);
+  
 
   function handle() {
     let user = ctx.user;
     console.log('the user is: ', user);
     console.log('this is the user top balance:', ctx.balance);
     
-    fetch(`/account/findOne/${email}`)
+    fetch(`/account/findOne/${ctx.email}`)
       .then((response) => response.text())
       .then((text) => {
         try {
@@ -79,7 +80,7 @@ function BalanceForm(props) {
           ctx.user = data.name;
           ctx.email = data.email;
           ctx.balance = data.balance;
-          // props.setStatus(JSON.stringify(data.balance));
+          props.setStatus(JSON.stringify(data.balance));
           props.setShow(false);
          
           console.log('this is the bottom user:', user);

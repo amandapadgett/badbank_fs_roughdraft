@@ -5,7 +5,8 @@ function Deposit(props) {
     const ctx = React.useContext(UserContext);
     let user = ctx.user;
 
-    console.log('balance:', ctx.balance);
+    // console.log('balance:', ctx.balance);
+    console.log('context:', ctx)
 
     return (
         <Card
@@ -40,7 +41,6 @@ function DepositMsg(props) {
         <button 
             type='submit'
             className='btn btn-light'
-           
             onClick={() => {
                 props.setShow(true);
                 props.setStatus('');
@@ -69,7 +69,7 @@ function DepositForm(props) {
         console.log('this is the user:', user);
         console.log('this is the user balance:', ctx.balance);
 
-        fetch(`/account/update/${email}/${amount}`)
+        fetch(`/account/update/${ctx.email}/${amount}`)
         .then(response => response.text())
         .then(text => {
             try {
@@ -79,22 +79,23 @@ function DepositForm(props) {
             //     console.log('JSON:', data);
             //   setName(ctx.user.name);
              
-                ctx.user = data.name;
-                ctx.email = data.email;
-                ctx.balance = data.balance
-                console.log('username:',user);
+                // ctx.user = data.name;
+                // ctx.email = data.email;
+                // ctx.balance = data.balance
+                console.log('username:',user, ctx.email);
             } catch(err) {
                 props.setStatus('Deposit failed')
                 console.log('err:', text);
             }
             
         });
-        ctx.balance = Number(ctx.balance) + Number(amount)
+        ctx.balance = Number(ctx.balance) + Number(amount);
+        console.log('testing the break:', ctx.balance);
       }
 
 return (
     <>
-    <h6>Please log into your account via the Login page before making a deposit.</h6> <br />
+    {/* <h6>Please log into your account via the Login page before making a deposit.</h6> <br />
         
     User Email <br/>
     <input 
@@ -103,7 +104,7 @@ return (
         placeholder="Enter account email"
         value={email}
         onChange={e => setEmail(e.currentTarget.value)} /> 
-        <br />
+        <br /> */}
 
 
     Amount <br />

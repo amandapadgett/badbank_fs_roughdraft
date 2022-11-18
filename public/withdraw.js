@@ -40,7 +40,6 @@ function WithdrawMsg(props) {
       type='submit'
       className='btn btn-light'
       onClick={() => {
-          setUser(user)
           props.setShow(true);
           props.setStatus('');
       }}>
@@ -87,8 +86,8 @@ function WithdrawForm(props) {
               console.log('JSON:', data);
             //   setName(ctx.user.name);
             //   setBalance(data.balance);
-              ctx.email = data.email;
-              ctx.balance = data.balance;
+              // ctx.email = data.email;
+              // ctx.balance = data.balance;
               console.log('username:',user);
               console.log('user balance:', ctx.balance);
           } catch(err) {
@@ -109,14 +108,14 @@ function WithdrawForm(props) {
 
 return (
   <>
-  User <br/>
+  {/* User <br/>
   <input 
       type="input"
       className="form-control"
       placeholder="Enter account email"
       value={email}
       onChange={e => setEmail(e.currentTarget.value)} /> 
-      <br />
+      <br /> */}
 
 
   Amount <br />

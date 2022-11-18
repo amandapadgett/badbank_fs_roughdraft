@@ -96,8 +96,8 @@ function NavBar(props){
           </li>       
         </ul>
         </div>
-        <span className="navbar-text">
-       {/* {ctx.user} */} User Name Here
+        <span id="activeuser" className="navbar-text">
+       
       </span>
      
     </nav>

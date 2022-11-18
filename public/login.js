@@ -91,16 +91,19 @@ function LoginForm(props){
             props.setStatus('');
             console.log('JSON:', data);
             // setName(ctx.user.name);
+            let activeuser = document.getElementById('activeuser');
+            activeuser.innerText = ctx.user;
           }) 
           promise.catch(e => console.log('promise message:',e.message));
           } 
-          //   else if (!firebaseUser) {
-          //   alert('email or password was incorrect');
-          //   setTimeout(() => setStatus(''), 2000);
-          //   setEmail('');
-          //   setPassword('');
-          //   setUpdate(false);
-          // }
+            else  {
+          
+            alert('email or password was incorrect');
+            setTimeout(() => setStatus(''), 2000);
+            setEmail('');
+            setPassword('');
+            setUpdate(false);
+          }
        
       })    
      
