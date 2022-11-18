@@ -1,5 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = "mongodb+srv://amandapadgett:clemson94@cluster0.hmbbsqn.mongodb.net/?retryWrites=true&w=majority";
+const url = "mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.hmbbsqn.mongodb.net/?retryWrites=true&w=majority";
 // const url         = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/badbank';
 let db            = null;
 const mongoose = require('mongoose');

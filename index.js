@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 mongoose
-  .connect("mongodb+srv://amandapadgett:clemson94@cluster0.hmbbsqn.mongodb.net/?retryWrites=true&w=majority",
+  .connect("mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.hmbbsqn.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewURLParser: true,
     useUnifiedTopology: true,
