@@ -5,6 +5,8 @@ var dal = require('./dal.js');
 
 require('dotenv').config();
 
+console.log(process.env)
+
 
 app.use(express.static('public'));
 app.use(cors());
