@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 mongoose
-  .connect("mongodb+srv://amandapadgett:BBC%40allison03@cluster0.hmbbsqn.mongodb.net/?retryWrites=true&w=majority",
+  .connect("mongodb+srv://amandapadgett:clemson94@cluster0.hmbbsqn.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewURLParser: true,
     useUnifiedTopology: true,
