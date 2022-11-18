@@ -1,12 +1,10 @@
 {
   "name": "threelittletiers",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
-    
   },
   "author": "AmandaPadgett",
   "license": "MIT",
@@ -18,5 +16,14 @@
     "heroku": "^7.66.4",
     "mongodb": "^4.11.0",
     "mongoose": "^6.7.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amandapadgett/badbank_fs_roughdraft.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amandapadgett/badbank_fs_roughdraft/issues"
+  },
+  "homepage": "https://github.com/amandapadgett/badbank_fs_roughdraft#readme",
+  "description": ""
 }
