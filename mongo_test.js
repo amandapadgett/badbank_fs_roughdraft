@@ -13,14 +13,14 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
     var email = name + '@mit.edu';
 
     //insert into user table
-    var collection = db.collection('customers');
+    var collection = db.collection('users');
     var doc = {name, email};
     collection.insertOne(doc, {w:1}, function(err, result) {
         console.log('Document insert');
     });
 
     var customers = db
-        .collection('customers')
+        .collection('users')
         .find()
         .toArray(function(err,docs) {
             console.log('Collection:', docs)
