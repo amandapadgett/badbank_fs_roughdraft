@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var cors = require('cors');
 var dal = require('./dal.js');
+const mongoose = require('mongoose');
 require('dotenv').config();
 const PORT = process.env.PORT;
 
