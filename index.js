@@ -6,7 +6,7 @@ require('dotenv').config();
 const PORT = process.env.PORT ;
 
 mongoose
-  .connect("mongodb+srv://amandapadgett:<password>@cluster0.hmbbsqn.mongodb.net/test",
+  .connect("mongodb+srv://amandapadgett:<BBC@allison03>@cluster0.hmbbsqn.mongodb.net/test",
   {
     useNewURLParser: true,
     useUnifiedTopology: true,
