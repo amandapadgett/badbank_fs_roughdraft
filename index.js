@@ -80,5 +80,5 @@ app.get('/account/all', (req, res) => {
   });
 });
 
- var port = process.env.PORT || 3000
+const port = process.env.PORT || 3000
 app.listen(PORT, () => console.log(`running on port:', ${PORT}`));
