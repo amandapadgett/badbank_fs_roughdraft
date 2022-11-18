@@ -40,6 +40,7 @@ function WithdrawMsg(props) {
       type='submit'
       className='btn btn-light'
       onClick={() => {
+          setUser(user)
           props.setShow(true);
           props.setStatus('');
       }}>
@@ -76,7 +77,7 @@ function WithdrawForm(props) {
         setUpdate(false);
         setShow(true);
 
-      fetch(`/account/update/${email}/${-amount}`)
+      fetch(`/account/update/${user.email}/${-amount}`)
       .then(response => response.text())
       .then(text => {
           try {
@@ -130,7 +131,7 @@ return (
   <button 
       type='submit'
       className="btn btn-light"
-      disabled={amount === '' || amount <= 0 || isNaN(amount)}
+      disabled={ amount === '' || amount <= 0 || isNaN(amount)}
       onClick={handle}>
          Withdraw
   </button>

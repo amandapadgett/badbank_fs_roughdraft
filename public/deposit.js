@@ -40,10 +40,12 @@ function DepositMsg(props) {
         <button 
             type='submit'
             className='btn btn-light'
+           
             onClick={() => {
                 props.setShow(true);
                 props.setStatus('');
-            }}>
+            }
+            }>
             <h6>  Make Another Deposit</h6>
             </button>
         
@@ -116,6 +118,7 @@ return (
     <button 
         type='submit'
         className="btn btn-light"
+        disabled={amount === '' || amount <= 0 || isNaN(amount)}
         onClick={handleDeposit}>
             Deposit
     </button>

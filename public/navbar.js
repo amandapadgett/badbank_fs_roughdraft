@@ -4,7 +4,8 @@ function NavBar(props){
   const [show, setShow] = React.useState(true);
   // const [status, setStatus] = React.useState('');
   // const [name, setName] = React.useState('');
-  
+
+ 
 
   function handleLogout() {
     firebase.auth().signOut()
@@ -96,7 +97,7 @@ function NavBar(props){
         </ul>
         </div>
         <span className="navbar-text">
-        UserName here
+       {/* {ctx.user} */} User Name Here
       </span>
      
     </nav>

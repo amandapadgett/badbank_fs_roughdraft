@@ -125,7 +125,8 @@ function CreateAccount() {
            </> ) : ( <>
            
             <h5>Success!</h5>
-            <h6>{name}, your account has been created.</h6>
+            <h6>{name}, your account has been created.
+            Your login email is {email}</h6>
             <button 
             type="submit" 
             className="btn btn-light" 

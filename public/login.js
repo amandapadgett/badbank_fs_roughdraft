@@ -34,7 +34,8 @@ function LoginMsg(props){
    console.log('trying to find users name:', ctx.name);
 
   return(<>
-    <h5>Welcome back, {ctx.user}.</h5>
+    <h5>Welcome back,</h5>
+    <h5> {ctx.user}!</h5>
     <h6>You are successfully logged in.</h6>
     <h6>Your balance is ${ctx.balance}</h6> <br />
    
@@ -63,7 +64,7 @@ function LoginForm(props){
  
   const ctx = React.useContext(UserContext);
   // const [name, setName] = React.useState('');
-
+  console.log('username:', user);
 
   function handleEmailLogin(){
     let user = ctx.user;
@@ -91,14 +92,15 @@ function LoginForm(props){
             console.log('JSON:', data);
             // setName(ctx.user.name);
           }) 
-          promise.catch(e => console.log(e.message));
-          } else if (!firebaseUser) {
-            alert('email or password was incorrect');
-            setTimeout(() => setStatus(''), 2000);
-            setEmail('');
-            setPassword('');
-            setUpdate(false);
-          }
+          promise.catch(e => console.log('promise message:',e.message));
+          } 
+          //   else if (!firebaseUser) {
+          //   alert('email or password was incorrect');
+          //   setTimeout(() => setStatus(''), 2000);
+          //   setEmail('');
+          //   setPassword('');
+          //   setUpdate(false);
+          // }
        
       })    
      
