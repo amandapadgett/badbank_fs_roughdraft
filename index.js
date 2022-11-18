@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 var app = express();
 var cors = require('cors');
 var dal = require('./dal.js');
@@ -72,5 +72,5 @@ app.get('/account/all', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`running on port: ${PORT}`));
