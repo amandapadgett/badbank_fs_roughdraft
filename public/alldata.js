@@ -1,5 +1,5 @@
 function AllData(){
-  const [data, setData] = React.useState('')
+  const [data, setData] = React.useState('');
  
   React.useEffect(() => {
    //fetch all acounts from API
