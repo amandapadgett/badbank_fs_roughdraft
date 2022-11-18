@@ -3,7 +3,8 @@ var app = express();
 var cors = require('cors');
 var dal = require('./dal.js');
 require('dotenv').config();
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT;
+
 
 mongoose
   .connect("mongodb+srv://amandapadgett:BBC@allison03@cluster0.hmbbsqn.mongodb.net/test",
@@ -81,4 +82,4 @@ app.get('/account/all', (req, res) => {
 });
 
 const port = process.env.PORT || 3000
-app.listen(PORT, () => console.log(`running on port:', ${PORT}`));
+app.listen(PORT, () => console.log(`running on port: ${PORT}`));
