@@ -8,7 +8,7 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
     console.log("Connected successfully to amanda db server");
 
     // connect to myproject database
-    db = client.db('badbanktrial2');
+    db = client.db('badbanktrial');
 });
 
 //create user account
