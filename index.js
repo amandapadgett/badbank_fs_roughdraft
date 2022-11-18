@@ -5,10 +5,8 @@ var dal = require('./dal.js');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-
-
 mongoose
-  .connect("mongodb+srv://amandapadgett:BBC@allison03@cluster0.hmbbsqn.mongodb.net/test",
+  .connect("mongodb+srv://amandapadgett:BBC%40allison03@cluster0.hmbbsqn.mongodb.net/test",
   {
     useNewURLParser: true,
     useUnifiedTopology: true,
