@@ -1,12 +1,13 @@
-const { MongoClient } = require("mongodb").MongoClient;
-const uri         = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mybadbank';
+const MongoClient = require('mongodb').MongoClient;
+const url         = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/mybadbank';
 let db            = null;
  
 // connect to mongo
-MongoClient.connect(uri, { useUnifiedTopology: true }, function(err, client) {
-    console.log("Connected successfully to amanda db server");
+MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client) {
+    console.log("Connected successfully to db server");
+
     // connect to myproject database
-    db = client.db("mybadbank");
+    db = client.db('mybadbank');
 });
 
 //create user account
