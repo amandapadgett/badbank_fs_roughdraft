@@ -1,16 +1,12 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require("mongodb").MongoClient;
 const uri         = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/badbank';
 let db            = null;
-const dotenv = require("dotenv");
-dotenv.config({ path: "./env" });
-
  
 // connect to mongo
-MongoClient.connect(uri, {useUnifiedTopology: true}, function(err, client) {
+MongoClient.connect(uri, { useUnifiedTopology: true }, function(err, client) {
     console.log("Connected successfully to amanda db server");
-
     // connect to myproject database
-    db = client.db('badbank');
+    db = client.db("badbank");
 });
 
 //create user account
@@ -20,7 +16,7 @@ function create(name, email, password) {
         const doc = {name, email, password, balance: 0};
         collection.insertOne(doc, {w:1}, function(err, result) {
             err ? reject(err) : resolve(doc);
-        })
+        });
     })
 }
 
@@ -45,7 +41,7 @@ function findOne(email) {
         .findOne({email: email})
         .then((doc) => resolve(doc))
         .catch((err) => reject(err))
-    })
+    });
 }
 
 //update after deposit or withdrawal
@@ -73,7 +69,7 @@ function all() {
             .toArray(function(err, docs) {
                 err ? reject(err) : resolve(docs);
             });
-    })
+    });
 }
 
-module.exports = {create, find, findOne, update, all};
+module.exports = { create, find, findOne, update, all };
