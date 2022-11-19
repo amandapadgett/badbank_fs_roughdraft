@@ -1,7 +1,8 @@
-const MongoClient = require('mongodb').MongoClient;
+const { MongoClient } = require('mongodb');
 const uri         = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/badbank';
 let db            = null;
-
+const dotenv = require("dotenv");
+dotenv.config({ path: "./env" });
 
  
 // connect to mongo
